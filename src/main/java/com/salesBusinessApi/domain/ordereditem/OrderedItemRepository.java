@@ -1,0 +1,14 @@
+package com.salesBusinessApi.domain.ordereditem;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface OrderedItemRepository extends JpaRepository<OrderedItem, Long> {
+
+    List<OrderedItem> findByActiveTrue();
+
+    OrderedItem findByCode(int code);
+}
