@@ -28,12 +28,12 @@ public class Cart {
 
     private boolean active;
 
-    public void appendItemProductOnCart(OrderedItem orderedItem) {
+    public void appendOrderedItemOnCart(OrderedItem orderedItem) {
         listOrderedItems.add(orderedItem);
         this.totalValue = totalValue + (orderedItem.getItem().getValueItem().floatValue() * orderedItem.getQuantity());
     }
 
-    public void deleteItemProductOnCart(OrderedItem orderedItem) {
+    public void deleteOrderedItemOnCart(OrderedItem orderedItem) {
         listOrderedItems.remove(orderedItem);
         this.totalValue = totalValue - (orderedItem.getItem().getValueItem().floatValue() * orderedItem.getQuantity());
     }

@@ -15,7 +15,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class) //error 400
     public ResponseEntity handleError400(MethodArgumentNotValidException ex) {
-        var errors = ex.getFieldErrors(); //list erros of exception
+        var errors = ex.getFieldErrors();
 
         return ResponseEntity.badRequest().body(errors.stream().map(DataErrorsValidation::new).toList());
     }

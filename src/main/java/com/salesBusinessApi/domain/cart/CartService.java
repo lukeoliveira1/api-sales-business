@@ -60,12 +60,12 @@ public class CartService {
         var item_quantity = orderedItemRepository.findByCode(codeProduct);
 
         if(cart != null && item_quantity != null){
-            cart.appendItemProductOnCart(item_quantity);
+            cart.appendOrderedItemOnCart(item_quantity);
             cartRepository.saveAndFlush(cart);
             return mapper.toDtoFromEntity(cart);
         }
 
-        throw new EntityNotFoundException("Não encontrado");
+        throw new EntityNotFoundException("Entity not found");
     }
 
     public CartDTO dropItemProductonCart(int code, int codeItem) {
@@ -73,11 +73,11 @@ public class CartService {
         var item_quantity = orderedItemRepository.findByCode(codeItem);
 
         if(cart != null && item_quantity != null){
-            cart.deleteItemProductOnCart(item_quantity);
+            cart.deleteOrderedItemOnCart(item_quantity);
             cartRepository.saveAndFlush(cart);
             return mapper.toDtoFromEntity(cart);
         }
 
-        throw new EntityNotFoundException("Não encontrado");
+        throw new EntityNotFoundException("Entity not found");
     }
 }
