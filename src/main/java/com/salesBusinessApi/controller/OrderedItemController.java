@@ -4,6 +4,8 @@ import com.salesBusinessApi.domain.ordereditem.OrderedItemDTO;
 import com.salesBusinessApi.domain.ordereditem.OrderedItemForm;
 import com.salesBusinessApi.domain.ordereditem.OrderedItemMapper;
 import com.salesBusinessApi.domain.ordereditem.OrderedItemService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ordered-item")
+@Tag(name = "Order")
 public class OrderedItemController {
 
     @Autowired
@@ -23,8 +26,8 @@ public class OrderedItemController {
     @Autowired
     private OrderedItemMapper mapper;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderedItemDTO> findById(@PathVariable("id") int code) {
+    @GetMapping("/{codeOrderedItem}")
+    public ResponseEntity<OrderedItemDTO> findById(@PathVariable("codeOrderedItem") int code) {
         var orderedItem = orderedItemService.findById(code);
         return ResponseEntity.ok(orderedItem);
     }
@@ -38,22 +41,23 @@ public class OrderedItemController {
 
     @PostMapping
     @Transactional
+    @Operation(description = "Add an item and quantity")
     public ResponseEntity<OrderedItemDTO> register(@RequestBody @Valid OrderedItemForm orderedItemForm, UriComponentsBuilder uriBuilder) {
         var orderedItem = orderedItemService.create(orderedItemForm);
 
         return ResponseEntity.ok(orderedItem);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<OrderedItemDTO> update(@PathVariable("id") int code, @RequestBody @Valid OrderedItemForm orderedItemForm) {
+    @PutMapping("/update/{codeOrderedItem}")
+    public ResponseEntity<OrderedItemDTO> update(@PathVariable("codeOrderedItem") int code, @RequestBody @Valid OrderedItemForm orderedItemForm) {
         var orderedItem = orderedItemService.update(code, orderedItemForm);
 
         return ResponseEntity.ok(orderedItem);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{codeOrderedItem}")
     @Transactional
-    public ResponseEntity delete(@PathVariable("id") int code) {
+    public ResponseEntity delete(@PathVariable("codeOrderedItem") int code) {
         orderedItemService.delete(code);
 
         return ResponseEntity.noContent().build();

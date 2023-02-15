@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-
 public class salesBusinessApiApplication {
 
 	public static void main(String[] args) {
@@ -23,4 +22,5 @@ public class salesBusinessApiApplication {
 			}
 		};
 	}
+
 }

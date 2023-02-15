@@ -3,6 +3,7 @@ package com.salesBusinessApi.controller;
 import com.salesBusinessApi.domain.item.ItemMapper;
 import com.salesBusinessApi.domain.item.ItemDTO;
 import com.salesBusinessApi.domain.item.ItemService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@Tag(name = "Item")
 public class ItemController {
 
     @Autowired
@@ -30,8 +32,8 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable("id") int code) {
+    @GetMapping("/{codeItem}")
+    public ResponseEntity findById(@PathVariable("codeItem") int code) {
         var item = itemService.findById(code);
         return ResponseEntity.ok(item);
     }
@@ -43,16 +45,16 @@ public class ItemController {
         return ResponseEntity.ok(list_item);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{codeItem}")
     @Transactional
-    public ResponseEntity update(@PathVariable("id") int code, @RequestBody @Valid ItemDTO itemDTO) {
+    public ResponseEntity update(@PathVariable("codeItem") int code, @RequestBody @Valid ItemDTO itemDTO) {
         var item = itemService.update(code, itemDTO);
         return ResponseEntity.ok(item);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{codeItem}")
     @Transactional
-    public ResponseEntity delete(@PathVariable("id") int code) {
+    public ResponseEntity delete(@PathVariable("codeItem") int code) {
         itemService.delete(code);
 
         return ResponseEntity.noContent().build();

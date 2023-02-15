@@ -3,6 +3,8 @@ package com.salesBusinessApi.controller;
 import com.salesBusinessApi.domain.cart.CartDTO;
 import com.salesBusinessApi.domain.cart.CartMapper;
 import com.salesBusinessApi.domain.cart.CartService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
+@Tag(name = "Cart")
 public class CartController {
 
     @Autowired
@@ -24,8 +27,8 @@ public class CartController {
     private CartMapper mapper;
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable("id") int code) {
+    @GetMapping("/{codeCart}")
+    public ResponseEntity findById(@PathVariable("codeCart") int code) {
         var cart = cartService.findById(code);
         return ResponseEntity.ok(cart);
     }
@@ -45,33 +48,35 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{codeCart}")
     @Transactional
-    public ResponseEntity<CartDTO> update(@PathVariable("id") int code, @RequestBody @Valid CartDTO cartDTO) {
+    public ResponseEntity<CartDTO> update(@PathVariable("codeCart") int code, @RequestBody @Valid CartDTO cartDTO) {
         var cart = cartService.update(code, cartDTO);
 
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping("/addProduct/{id}/{idItemProduct}")
+    @Operation(summary = "Add order on cart")
+    @PutMapping("/addProduct/{codeCart}/{codeOrderedItem}")
     @Transactional
-    public ResponseEntity<CartDTO> addItemOrder(@PathVariable("id") int code, @PathVariable("idItemProduct") int codeItem) {
+    public ResponseEntity<CartDTO> addItemOrder(@PathVariable("codeCart") int code, @PathVariable("codeOrderedItem") int codeItem) {
         var cart = cartService.addItemProductonCart(code, codeItem);
 
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping("/deleteProduct/{id}/{idItemProduct}")
+    @Operation(summary = "Remove order from cart")
+    @PutMapping("/deleteProduct/{codeCart}/{codeOrderedItem}")
     @Transactional
-    public ResponseEntity<CartDTO> deleteItemOrder(@PathVariable("id") int code, @PathVariable("idItemProduct") int codeItem) {
+    public ResponseEntity<CartDTO> deleteItemOrder(@PathVariable("codeCart") int code, @PathVariable("codeOrderedItem") int codeItem) {
         var cart = cartService.dropItemProductonCart(code, codeItem);
 
         return ResponseEntity.ok(cart);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{codeCart}")
     @Transactional
-    public ResponseEntity delete(@PathVariable("id") int code) {
+    public ResponseEntity delete(@PathVariable("codeCart") int code) {
         cartService.delete(code);
 
         return ResponseEntity.noContent().build();
