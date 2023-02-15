@@ -4,3 +4,6 @@ A sales products API to study Java and Spring.
 
 With JUnit Testing, JWT Authentication/Authorization and API documentation with Swagger.
 
+# UML diagram
+
+![UMLdiagram](https://user-images.githubusercontent.com/105166358/219141574-e8c8b756-8a7b-49d3-bc7b-667561b5228c.png)
