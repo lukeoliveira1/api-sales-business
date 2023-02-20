@@ -1,6 +1,8 @@
 # api-sales-business
 
-A sales products API to study Java and Spring.
+A sales products API.
+
+Project to study Java and Spring.
 
 - JUnit Testing
 -  JWT Authentication/Authorization
