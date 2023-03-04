@@ -1,6 +1,6 @@
 # api-sales-business
 
-A sales products API.
+An API to manage product sales.
 
 Project to study Java and Spring.
 
